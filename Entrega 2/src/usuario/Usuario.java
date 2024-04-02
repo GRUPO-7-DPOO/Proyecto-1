@@ -6,4 +6,7 @@ public abstract class Usuario {
 	public String nombre;
 	public int telefono;
 	public String correo;
+	public String tipoUsuario;
+	
+
 }

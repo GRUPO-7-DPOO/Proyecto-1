@@ -13,4 +13,14 @@ public abstract class Piezas {
 	public String propietario;
 	public double precioFijo;
 	public int id;
+	
+	public Piezas (String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario) {
+		this.titulo = titulo;
+		Anio = anio;
+		this.lugarCreacion = lugarCreacion;
+		Autores = autores;
+		this.propietario = propietario;
+	}
+	
+	
 }
