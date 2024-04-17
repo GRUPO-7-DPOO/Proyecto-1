@@ -13,6 +13,9 @@ public class Galeria {
 	
 	public Galeria() {
 		this.Usuarios = new HashMap<String,Usuario>();
+		this.Compras = new ArrayList<Compra>();
+		Usuario admin = new Admin("Sebastian", "1234", "1234" , "awww", 123);
+		this.Usuarios.put("1234", admin);
 	}
 	
 	public void crearUsuario(String login, String clave, String nombre, int telefono, String correo, String tipoUsuario) throws Exception {
@@ -24,11 +27,23 @@ public class Galeria {
 		}
 	}
 	
-	public boolean existeUsuario(String login) {
-		if (this.Usuarios.containsKey(login)) {
-			return true;
+	public String iniciarSesion(String login, String clave) throws Exception{
+		if (existeUsuario(login)) {
+			Usuario user = this.Usuarios.get(login);
+			if (clave.equals(user.getClave())) {
+				return user.getTipoUsuario();
+			}
+			else {
+				throw new Exception("Clave Incorrecta");
+			}	
 		}
-		return false;
+		else {
+			throw new Exception("Este usuario no existe");	
+		}
+	}
+	
+	public boolean existeUsuario(String login) {
+		return this.Usuarios.containsKey(login);
 	}
 	
 	public boolean existePiezas(String nombre) {

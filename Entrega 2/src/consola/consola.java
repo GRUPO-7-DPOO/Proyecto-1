@@ -8,7 +8,7 @@ import galeria.*;
 public class consola {
 	private Galeria galeria;
 	
-	public consola() throws Exception {
+	public consola() {
 		this.galeria = new Galeria();
 		menu();
 	}
@@ -28,9 +28,18 @@ public class consola {
 			if (option == 1) {
 				String login,clave;
 				System.out.println("Login: ");
-				login = sc.nextLine();
+				login = sc.next();
 				System.out.println("Clave: ");
-				clave = sc.nextLine();
+				clave = sc.next();
+				
+				try {
+					String bLogin = iniciarSesion(login, clave);
+					System.out.println(bLogin);
+				}
+				
+				catch(Exception e){
+					System.out.println(e.getMessage());
+				}
 				
 				
 			}
@@ -40,9 +49,8 @@ public class consola {
 		sc.close();	
 	}
 
-	private boolean encontrarUsuario(String login) {
-		boolean existe = galeria.existeUsuario(login);
-		return existe;
+	private String iniciarSesion(String login, String clave) throws Exception {
+		return galeria.iniciarSesion(login, clave);
 	}
 
 

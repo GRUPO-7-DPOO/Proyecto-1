@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import piezas.*;
 
 public class Comprador extends Usuario {
+	@Override
+	
+	public String getClave() {
+		// TODO Auto-generated method stub
+		return super.getClave();
+	}
+
 	public double precioLimite;
 	public ArrayList <String> obrasPropiedad;
 	

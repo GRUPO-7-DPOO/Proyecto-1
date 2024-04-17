@@ -17,4 +17,17 @@ public class Subasta {
 	public void añadirRegistro(String login, int precio) {
 		this.registros.put(login, precio);
 	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public ArrayList<Pieza> getPiezas() {
+		return piezas;
+	}
+
+	public HashMap<String, Integer> getRegistros() {
+		return registros;
+	}
+	
 }
