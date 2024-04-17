@@ -2,7 +2,7 @@ package piezas;
 
 import java.util.ArrayList;
 
-public abstract class Piezas {
+public abstract class Pieza {
 	public String titulo;
 	public int Anio;
 	public String lugarCreacion;
@@ -14,7 +14,7 @@ public abstract class Piezas {
 	public double precioFijo;
 	public int id;
 	
-	public Piezas (String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario) {
+	public Pieza (String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario) {
 		this.titulo = titulo;
 		Anio = anio;
 		this.lugarCreacion = lugarCreacion;
