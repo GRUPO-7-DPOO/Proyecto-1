@@ -1,5 +1,7 @@
 package usuario;
 
+import java.util.HashMap;
+import piezas.*;
 
 public class Admin extends Usuario {
 	
@@ -11,4 +13,8 @@ public class Admin extends Usuario {
 		this.telefono = telefono;
 		this.tipoUsuario = "Administrador";
 		}
-}
+	
+	public static void registrarNuevaPieza(Pieza pieza, HashMap <String, Pieza> piezas) {
+		piezas.put(pieza.getTitulo(), pieza);
+	}
+}	

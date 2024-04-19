@@ -3,7 +3,7 @@ package piezas;
 import java.util.ArrayList;
 
 public abstract class Pieza {
-	public String titulo;
+	protected String titulo;
 	public int Anio;
 	public String lugarCreacion;
 	public ArrayList<String> Autores;
@@ -20,6 +20,10 @@ public abstract class Pieza {
 		this.lugarCreacion = lugarCreacion;
 		Autores = autores;
 		this.propietario = propietario;
+	}
+	
+	public String getTitulo() {
+		return this.titulo;
 	}
 	
 	

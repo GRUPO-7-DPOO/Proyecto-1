@@ -14,6 +14,7 @@ public class Galeria {
 	public Galeria() {
 		this.Usuarios = new HashMap<String,Usuario>();
 		this.Compras = new ArrayList<Compra>();
+		this.Piezas = new HashMap<String, Pieza>();
 		Usuario admin = new Admin("Sebastian", "1234", "1234" , "awww", 123);
 		this.Usuarios.put("1234", admin);
 	}
@@ -44,6 +45,12 @@ public class Galeria {
 	
 	public boolean existeUsuario(String login) {
 		return this.Usuarios.containsKey(login);
+	}
+	
+	public void registrarVideo(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, int duracion, String resolucion, String peso, String categoria) {
+		Video vid = new Video(titulo,anio,lugarCreacion,autores,propietario,duracion,resolucion,peso,categoria);
+		this.Piezas.put(vid.getTitulo(), vid);
+		Admin.registrarNuevaPieza(vid,this.Piezas);
 	}
 	
 	public boolean existePiezas(String nombre) {
