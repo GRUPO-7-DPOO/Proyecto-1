@@ -27,7 +27,11 @@ public class Subasta {
 	}
 
 	public HashMap<String, Integer> getRegistros() {
-		return registros;
+		return this.registros;
+	}
+	
+	public void setRegistros(HashMap <String, Integer> registrosN) {
+		this.registros = registrosN;
 	}
 	
 }
