@@ -6,10 +6,10 @@ public class Fotografia extends Pieza{
 	
 	private String formato;
 	private String resolucion;
-	private ArrayList<Float> dimensiones;
+	private String dimensiones;
 	private String Categoria;
 	
-	public Fotografia(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, String formato, String resolucion, ArrayList<Float> dimensiones, String categoria) {
+	public Fotografia(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, String formato, String resolucion, String dimensiones, float ppp, String categoria) {
 		super(titulo, anio, lugarCreacion, autores, propietario);
 		this.formato = formato;
 		this.resolucion = resolucion;

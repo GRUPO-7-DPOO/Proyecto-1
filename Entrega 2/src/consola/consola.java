@@ -49,8 +49,23 @@ public class consola {
 							switch (option) {
 							
 							case 1:
+								System.out.println("Escriba el titulo de una pieza: ");
+								String titulo = sc.next();
+								System.out.println("Escriba el año de publicacion de esta: ");
+								int año = sc.nextInt();
+								System.out.println("Escriba el lugar de creacion de la pieza: ");
+								ArrayList <String> autores = listaAutores(sc);
+								System.out.println("Escriba el propietario actual de la obra: ");
+								String propietario = sc.next();
+								System.out.println("Escriba el tipo de pieza: ");
+								String tipoObra = sc.next();
+								
+								registrarPieza(titulo, año, titulo, autores, propietario, tipoObra, sc);
 								break;
 							case 2:
+								System.out.println("Diga el nombre de la pieza que quiere buscar: ");
+								String pieza = sc.next();
+								System.out.println(encontrarPieza(pieza));
 								break;
 								
 							}
@@ -111,15 +126,26 @@ public class consola {
 		return galeria.iniciarSesion(login, clave);
 	}
 	
-	private void registrarPieza(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, int duracion, String resolucion, String peso, String categoria) {
-		galeria.registrarVideo(titulo, anio, lugarCreacion, autores, propietario, duracion, resolucion, peso, categoria);
-	//Ahora lo corrijo, apenas sirve para video 
+	private void registrarPieza(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, String tipoPieza,Scanner sc) {
+		galeria.registrarPieza(titulo, anio, lugarCreacion, autores, propietario, tipoPieza,sc);
 	}
 	
 	public boolean encontrarPieza(String nombre) {
 		return galeria.existePiezas(nombre);	
 	}
 
+	private ArrayList<String> listaAutores(Scanner sc){
+		System.out.println("Diga los autores de esta pieza (Escriba 1 para finalizar: ");
+		String autor;
+		ArrayList<String> mat = new ArrayList<String>();
+		do {
+			autor = sc.next();
+			mat.add(autor);
+		}
+		while(!autor.equals("1"));
+		return mat;
+	}
+	
 	public static void main(String[] args) throws Exception {
 		new consola();
 	}
