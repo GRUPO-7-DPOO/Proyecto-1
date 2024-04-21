@@ -9,21 +9,34 @@ public class Galeria {
 	private HashMap <String, Usuario > Usuarios;
 	private ArrayList<Compra> Compras;
 	private HashMap <String, Pieza> Piezas;
-	
+	private ArrayList<Compra> ComprasVerificadas;
+	private HashMap<Compra,String> pagos;
 	
 	public Galeria() {
 		this.Usuarios = new HashMap<String,Usuario>();
 		this.Compras = new ArrayList<Compra>();
 		this.Piezas = new HashMap<String, Pieza>();
+		this.ComprasVerificadas = new ArrayList<Compra>();
 		Usuario admin = new Admin("Sebastian", "1234", "1234" , "awww", 123);
+		Comprador comprador = new Comprador("Pibas", "Pibas", "Pibas", "Pibas", 1);
+		Cajero operador = new Cajero("Milito","Milito",":v",":v",1);
 		this.Usuarios.put("1234", admin);
+		this.Usuarios.put("Pibas", comprador);
+		this.Usuarios.put("Milito", operador);
+		ArrayList<String> autores = new ArrayList<>();
+		autores.add("Alejo");
+		Pieza alejo = new Video("Alejo", 1, "Peru", autores, "Alejo", 12, "Alejo", 12, "Alejo");
+		Pieza yo = new Video("sebitas", 1, "Peru", autores, "Alejo", 12, "Alejo", 12, "Alejo");
+		this.Piezas.put("Alejo", alejo);
+		this.Piezas.put("sebitas", yo);
+		comprador.añadirPieza(yo);
 	}
 	
 	public void crearUsuario(String login, String clave, String nombre, int telefono, String correo, String tipoUsuario) throws Exception {
 		if (existeUsuario(login)) {throw new Exception("Ya existe este usuario.");}
 		
 		else {
-			Usuario user = new Comprador(nombre,login,telefono,clave,correo,tipoUsuario);
+			Usuario user = new Comprador(nombre,login,clave,correo,telefono);
 			this.Usuarios.put(login, user);
 		}
 	}
@@ -114,6 +127,7 @@ public class Galeria {
 			Pintura pint = new Pintura(titulo, anio, lugarCreacion, autores, propietario, dimensiones, materiales, cuidados, tecnica);
 			Admin.registrarNuevaPieza(pint, this.Piezas);
 			break;
+			
 		case "Video":
 			System.out.println("Escriba la duracion del video: ");
 			int duracion = info.nextInt();
@@ -136,6 +150,31 @@ public class Galeria {
 		return false;
 	}
 	
+	public void comprarPieza (String metodoPago, String comprador, String nombre, int valor ) throws Exception{
+		if (existePiezas(nombre)) {
+			Pieza pieza = this.Piezas.get(nombre);
+			if (pieza.getEstadoC()=="No disponible") {
+				throw new Exception("Esta pieza no esta disponible para ser comprada. \nCerrando Sesion...");
+			}
+			else if (pieza.getEstadoC()=="Bloqueada"){
+				throw new Exception("Esta pieza esta siendo comprada en su momento. \nCerrando Sesion...");
+			}
+			else if (pieza.getEstadoC()=="Comprada") {
+				throw new Exception("Esta pieza ya ha sido verificada y esta en proceso de pago. \nCerrando Sesion...");
+			}
+			else {
+				String id = nombre + "-" + comprador + "-" + metodoPago + "-" + Integer.toString(valor); 
+				Compra compra = new Compra(metodoPago, id, comprador, nombre, valor);
+				pieza.setEstadoC("Bloqueada");
+				this.Piezas.put(nombre, pieza);
+				this.Compras.add(compra);
+			}
+		}
+		else {
+			throw new Exception("Esta pieza no existe");
+		}
+	}
+	
 	private ArrayList<String> listaMateriales(Scanner sc){
 		System.out.println("Diga la lista de Materiales de esta pieza (Escriba 1 para finalizar: ");
 		String material;
@@ -147,5 +186,50 @@ public class Galeria {
 		while(!material.equals("1"));
 		return mat;
 	}
- 
+	
+	public String getNameUser(String login) {
+		Usuario user = this.Usuarios.get(login);
+		return user.getName();
+	}
+
+	public int getCompras(){
+		return this.Compras.size();
+	}
+
+	public int getComprasPagos() {
+		return this.ComprasVerificadas.size();
+	}
+	
+	public void verificarCompras(Scanner sc) {
+		mostrarCompras(this.Compras);
+		int c = sc.nextInt();
+		Compra compra =this.Compras.get(c-1);
+		Admin.verificarCompra(compra,this.Piezas,sc,this.Compras,this.ComprasVerificadas,c-1);
+	}
+	
+	public void mostrarCompras(ArrayList<Compra> comprasLista) {
+		int cantidad = 1;
+		for (Compra compra : comprasLista) {
+			System.out.println(Integer.toString(cantidad)+") Pieza: "+compra.piezaAComprar());
+		}
+	}
+	
+	public void piezasPropias(String login) {
+		Comprador comprador = (Comprador) this.Usuarios.get(login);
+		HashMap <String, Pieza> obrasPropiedad = comprador.getObrasPropiedad();
+		int i = 1;
+		Set <String> nombresObras = obrasPropiedad.keySet();
+		
+		for (String name : nombresObras) {
+			System.out.println(Integer.toString(i)+") "+name);
+			i++;
+		}
+	}
+	
+	public void registrarPagos(Scanner sc) {
+		mostrarCompras(this.ComprasVerificadas);
+		int c = sc.nextInt();
+		Compra compra = this.ComprasVerificadas.get(c-1);
+		Cajero.registrarPago(compra, this.Piezas, sc, ComprasVerificadas, c, this.Usuarios, this.pagos);
+	}
 }

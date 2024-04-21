@@ -7,11 +7,11 @@ public abstract class Pieza {
 	public int Anio;
 	public String lugarCreacion;
 	public ArrayList<String> Autores;
-	public String estadoC;
+	protected String estadoC; // Disponible, No disponible, Bloqueada, Comprada
 	public boolean enSubasta;
 	public boolean enBodega;
-	public String propietario;
-	public double precioFijo;
+	protected String propietario;
+	protected int precioFijo; // En caso que no este disponible el valor sera 0000
 	public int id;
 	
 	public Pieza (String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario) {
@@ -25,6 +25,26 @@ public abstract class Pieza {
 	public String getTitulo() {
 		return this.titulo;
 	}
+
+	public String getEstadoC() {
+		return estadoC;
+	}
+
+	public void setEstadoC(String estadoC) {
+		this.estadoC = estadoC;
+	}
+
+	public String getPropietario() {
+		return propietario;
+	}
 	
+	public int getPrecioFijo() {
+		return this.precioFijo;
+	}
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
+	}
 	
+
+
 }

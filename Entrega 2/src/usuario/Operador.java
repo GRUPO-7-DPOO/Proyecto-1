@@ -6,6 +6,15 @@ import galeria.*;
 public class Operador extends Usuario {
 	
 	private HashMap <String, Integer> mapaRegistro;
+	
+	public Operador(String nombre, String login, String clave, String correo, int telefono) {
+		super(nombre, login, clave, correo, telefono);
+		this.tipoUsuario = "Operador";
+		this.mapaRegistro = new HashMap<>();
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	@Override
 	public String getClave() {
