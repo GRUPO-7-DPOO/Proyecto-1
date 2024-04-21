@@ -61,12 +61,14 @@ public class Galeria {
 		String resolucion;
 		float peso;
 		String categoria;
-		System.out.println("Escriba el estado de Compra (Disponible o no Disponible): ");
+		System.out.println("Escriba el estado de Compra (Disponible o no Disponible, si escribe algo diferente a disponible se considerara no disponible): ");
 		String estadoC = info.next();
-		if (estadoC.equalsIgnoreCase("Disponible")&& estadoC.equalsIgnoreCase("No Disponible")) {throw new Exception("Estado no disponible.\nCerrando sesion...");}
+		if (!estadoC.equalsIgnoreCase("Disponible")) 
+		{estadoC = "No disponible";}
 		System.out.println("Escriba si estara en bodega o exhibida (Si escribe algo diferente a Bodega se considerara que no estara en esta.): ");
 		boolean bodega = true;
-		if (!info.next().equalsIgnoreCase("Bodega")){
+		String respuesta = info.next();
+		if (respuesta.equalsIgnoreCase("Bodega")){
 			bodega=false;
 		}
 		System.out.println("Escriba el valor de su pieza: ");
@@ -108,7 +110,6 @@ public class Galeria {
 		case "Escultura":
 			System.out.println("Diga la dimension de la escultura (Ancho x Largo x Profundidad): ");
 			dimensiones = info.next();
-			System.out.println("Diga los materiales de la escultura: ");
 			materiales = listaMateriales(info);
 			System.out.println("Escriba el peso de la escultura: ");
 			peso = info.nextFloat();
@@ -169,11 +170,7 @@ public class Galeria {
 				throw new Exception("Esta pieza ya ha sido verificada y esta en proceso de pago. \nCerrando Sesion...");
 			}
 			else {
-				String id = nombre + "-" + comprador + "-" + metodoPago + "-" + Integer.toString(valor); 
-				Compra compra = new Compra(metodoPago, id, comprador, nombre, valor);
-				pieza.setEstadoC("Bloqueada");
-				this.Piezas.put(nombre, pieza);
-				this.Compras.add(compra);
+				Comprador.comprarPieza(nombre, comprador, metodoPago, valor, pieza, this.Piezas, this.Compras);
 			}
 		}
 		else {
@@ -237,5 +234,26 @@ public class Galeria {
 		int c = sc.nextInt();
 		Compra compra = this.ComprasVerificadas.get(c-1);
 		Cajero.registrarPago(compra, this.Piezas, sc, ComprasVerificadas, c, this.Usuarios, this.pagos);
+	}
+	
+	public void crearSubasta(Scanner sc, Date date) throws Exception{
+		
+	}
+	
+	private ArrayList<Pieza> listaPiezas(Scanner sc) throws Exception{
+		System.out.println("Diga la lista de piezas que pasaran a la subasta (Escriba 1 para finalizar): ");
+		String pieza;
+		ArrayList<Pieza> piezas = new ArrayList<Pieza>();
+		do {
+			pieza = sc.next();
+			if (!existePiezas(pieza)) {
+				throw new Exception("Esta pieza no existe");
+			}
+			else {
+				piezas.add(this.Piezas.get(pieza));
+			}
+		}
+		while(!pieza.equalsIgnoreCase("1"));
+		return piezas;
 	}
 }

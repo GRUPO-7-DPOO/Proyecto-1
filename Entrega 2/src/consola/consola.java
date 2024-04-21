@@ -1,8 +1,9 @@
 package consola;
 
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.text.*;
+import java.time.*;
+import java.util.*;
 
 import galeria.*;
 
@@ -44,6 +45,7 @@ public class consola {
 							System.out.println("1. Registrar Nueva Pieza");
 							System.out.println("2. Buscar Pieza");
 							System.out.println("3. Verificar compras");
+							System.out.println("4. Crear Subasta");
 							option = sc.nextInt();
 							
 							switch (option) {
@@ -61,10 +63,13 @@ public class consola {
 							case 3:
 								verificarPiezas(sc);
 								break;
+							case 4:
+								crearSubasta(sc);
+								break;
 							}
 							
 						}
-						while (option!=4);
+						while (option!=5);
 						break;
 					case "Cajero":
 						do {
@@ -103,13 +108,7 @@ public class consola {
 					case "Operador":
 						do {
 							System.out.println("Funciones de Operador: ");
-							option = sc.nextInt();
-							}
-						while (option!=3);
-						break;
-					case "Empleados":
-						do {
-							System.out.println("Funciones de Empleados: ");
+							System.out.println("1. Editar registros subastas.");
 							option = sc.nextInt();
 							}
 						while (option!=3);
@@ -207,6 +206,13 @@ public class consola {
 		galeria.registrarPagos(sc);}
 	}
 	
+	private void crearSubasta(Scanner sc) throws Exception {
+		System.out.println("Escriba la fecha de finalizacion de la subasta (Formato: AÑO-MES-DIA): ");
+		String fecha = sc.next();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+		Date date = formatter.parse(fecha);
+		galeria.crearSubasta(sc,date);
+	}
 	public static void main(String[] args) throws Exception {
 		new consola();
 	}

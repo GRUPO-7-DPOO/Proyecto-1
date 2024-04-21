@@ -1,6 +1,8 @@
 package usuario;
 
 import java.util.*;
+
+import galeria.Compra;
 import piezas.*;
 
 public class Comprador extends Usuario {
@@ -41,4 +43,11 @@ public class Comprador extends Usuario {
 		this.obrasPropiedad.put(pieza.getTitulo(), pieza);
 	}
 	
+	public static void comprarPieza(String nombre, String comprador, String metodoPago, int valor, Pieza pieza, HashMap<String,Pieza> piezas , ArrayList<Compra> compras) {
+		String id = nombre + "-" + comprador + "-" + metodoPago + "-" + Integer.toString(valor); 
+		Compra compra = new Compra(metodoPago, id, comprador, nombre, valor);
+		pieza.setEstadoC("Bloqueada");
+		piezas.put(nombre, pieza);
+		compras.add(compra);
+	}
 }

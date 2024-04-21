@@ -54,5 +54,7 @@ public class Admin extends Usuario {
 		
 	}
 
-	
+	public static void crearSubasta() {
+		
+	}
 }	

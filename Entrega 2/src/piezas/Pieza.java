@@ -22,6 +22,7 @@ public abstract class Pieza {
 		this.propietario = propietario;
 		this.precioFijo = valor;
 		this.enBodega = bodega;
+		this.estadoC = estadoC;
 	}
 	
 	public String getTitulo() {

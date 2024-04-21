@@ -5,20 +5,21 @@ import piezas.*;
 
 public class Subasta {
 	public int id;
-	public String fecha;
+	public Date fecha;
 	public ArrayList <Pieza> piezas;
 	public HashMap <String, Integer> registros;
 	
-	public Subasta(int id, String fecha) {
+	public Subasta(int id, Date fecha, ArrayList <Pieza> piezas) {
 		this.id = id;
-		this.fecha = fecha;	
+		this.fecha = fecha;
+		this.piezas = piezas;
 	}
 	
 	public void añadirRegistro(String login, int precio) {
 		this.registros.put(login, precio);
 	}
 
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
