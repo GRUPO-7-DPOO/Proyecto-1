@@ -19,6 +19,10 @@ public class Compra {
 	public String getComprador() {
 		return this.comprador;
 	}
+
+	public String getId() {
+		return this.id;
+	}
 	
 	public int getValor() {
 		return this.valor;
