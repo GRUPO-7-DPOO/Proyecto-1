@@ -4,12 +4,12 @@ import java.util.*;
 import piezas.*;
 
 public class Subasta {
-	public int id;
+	public String id;
 	public Date fecha;
 	public ArrayList <Pieza> piezas;
 	public HashMap <String, Integer> registros;
 	
-	public Subasta(int id, Date fecha, ArrayList <Pieza> piezas) {
+	public Subasta(String id, Date fecha, ArrayList <Pieza> piezas) {
 		this.id = id;
 		this.fecha = fecha;
 		this.piezas = piezas;

@@ -11,12 +11,14 @@ public class Galeria {
 	private HashMap <String, Pieza> Piezas;
 	private ArrayList<Compra> ComprasVerificadas;
 	private HashMap<Compra,String> pagos;
+	private HashMap<String,Subasta> subastas;
 	
 	public Galeria() {
 		this.Usuarios = new HashMap<String,Usuario>();
 		this.Compras = new ArrayList<Compra>();
 		this.Piezas = new HashMap<String, Pieza>();
 		this.ComprasVerificadas = new ArrayList<Compra>();
+		this.subastas = new HashMap<String, Subasta>();
 		Usuario admin = new Admin("Admin", "1234", "1234" , "w", 123);
 		Comprador comprador = new Comprador("Comprador", "Comprador", "Comprador", "w", 1);
 		Cajero operador = new Cajero("Operador","Operador","Operador","w",1);
@@ -236,12 +238,13 @@ public class Galeria {
 		Cajero.registrarPago(compra, this.Piezas, sc, ComprasVerificadas, c, this.Usuarios, this.pagos);
 	}
 	
-	public void crearSubasta(Scanner sc, Date date) throws Exception{
-		ArrayList<Pieza> listaPiezas = listaPiezas(sc);
-		String id = "s";
+	public void crearSubasta(Scanner sc, Date date,String fecha) throws Exception{
+		String id = "-" + fecha +"-";
+		ArrayList<Pieza> listaPiezas = listaPiezas(sc,id);
+		Admin.crearSubasta(id, listaPiezas, date, this.subastas);
 	}
 	
-	private ArrayList<Pieza> listaPiezas(Scanner sc) throws Exception{
+	private ArrayList<Pieza> listaPiezas(Scanner sc, String id) throws Exception{
 		System.out.println("Diga la lista de piezas que pasaran a la subasta (Escriba 1 para finalizar): ");
 		String pieza;
 		ArrayList<Pieza> piezas = new ArrayList<Pieza>();
@@ -252,6 +255,7 @@ public class Galeria {
 			}
 			else {
 				piezas.add(this.Piezas.get(pieza));
+				id+=pieza+"-";
 			}
 		}
 		while(!pieza.equalsIgnoreCase("1"));

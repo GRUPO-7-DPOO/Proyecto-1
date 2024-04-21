@@ -54,7 +54,8 @@ public class Admin extends Usuario {
 		
 	}
 
-	public static void crearSubasta() {
-		
+	public static void crearSubasta(String id, ArrayList<Pieza> piezas, Date fecha, HashMap<String,Subasta> subastas) {
+		Subasta subata = new Subasta(id, fecha, piezas);
+		subastas.put(id, subata);
 	}
 }	

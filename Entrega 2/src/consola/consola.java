@@ -211,7 +211,7 @@ public class consola {
 		String fecha = sc.next();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 		Date date = formatter.parse(fecha);
-		galeria.crearSubasta(sc,date);
+		galeria.crearSubasta(sc,date,fecha);
 	}
 	public static void main(String[] args) throws Exception {
 		new consola();
