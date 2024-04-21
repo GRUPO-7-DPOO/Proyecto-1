@@ -243,6 +243,39 @@ public class Galeria {
 		ArrayList<Pieza> listaPiezas = listaPiezas(sc,id);
 		Admin.crearSubasta(id, listaPiezas, date, this.subastas);
 	}
+
+
+	public void crearCompra(String metodoPago, String id, String comprador, String piezaAComprar, int valor) {
+	    
+	    Compra nuevaCompra = new Compra(comprador, metodoPago, id, piezaAComprar,valor);
+	    this.Compras.add(nuevaCompra);
+	}
+
+
+	public void crearCompra(String metodoPago, String id, String comprador, String piezaAComprar, int valor) {
+	    
+	    Compra nuevaCompra = new Compra(comprador, metodoPago, id, piezaAComprar,valor);
+	    this.Compras.add(nuevaCompra);
+	}
+
+	
+        public void almacenarTextoPlano() {
+	    
+	    ArrayList<String> textos = new ArrayList<String>();
+	        for(Compra Compra : this.Compras) {
+	            textos.add(Compra.getComprador() + "," + Compra.getMetodoPago() + ";" + Compra.piezaXAComprar() +  "," + Compra.getId()+Compra.getValor() + "\n");			
+	        }
+	        ArchivoPlano.almacenar("cuentas.csv", textos);
+		}
+		
+	public void cargarTP() {
+		ArrayList<String> textos = ArchivoPlano.cargar("cuentas.csv");
+		for(String texto : textos) {
+			String []datos = texto.split(",");
+			this.crearCompra(datos[0], datos[1],datos[2],datos[3],Integer.parseInt(datos[5]));
+		}
+	}
+	
 	
 	private ArrayList<Pieza> listaPiezas(Scanner sc, String id) throws Exception{
 		System.out.println("Diga la lista de piezas que pasaran a la subasta (Escriba 1 para finalizar): ");
