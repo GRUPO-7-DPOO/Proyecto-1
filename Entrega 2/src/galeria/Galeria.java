@@ -17,19 +17,13 @@ public class Galeria {
 		this.Compras = new ArrayList<Compra>();
 		this.Piezas = new HashMap<String, Pieza>();
 		this.ComprasVerificadas = new ArrayList<Compra>();
-		Usuario admin = new Admin("Sebastian", "1234", "1234" , "awww", 123);
-		Comprador comprador = new Comprador("Pibas", "Pibas", "Pibas", "Pibas", 1);
-		Cajero operador = new Cajero("Milito","Milito",":v",":v",1);
+		Usuario admin = new Admin("Admin", "1234", "1234" , "w", 123);
+		Comprador comprador = new Comprador("Comprador", "Comprador", "Comprador", "w", 1);
+		Cajero operador = new Cajero("Operador","Operador","Operador","w",1);
 		this.Usuarios.put("1234", admin);
-		this.Usuarios.put("Pibas", comprador);
-		this.Usuarios.put("Milito", operador);
+		this.Usuarios.put("Comprador", comprador);
+		this.Usuarios.put("Operador", operador);
 		ArrayList<String> autores = new ArrayList<>();
-		autores.add("Alejo");
-		Pieza alejo = new Video("Alejo", 1, "Peru", autores, "Alejo", 12, "Alejo", 12, "Alejo");
-		Pieza yo = new Video("sebitas", 1, "Peru", autores, "Alejo", 12, "Alejo", 12, "Alejo");
-		this.Piezas.put("Alejo", alejo);
-		this.Piezas.put("sebitas", yo);
-		comprador.añadirPieza(yo);
 	}
 	
 	public void crearUsuario(String login, String clave, String nombre, int telefono, String correo, String tipoUsuario) throws Exception {
