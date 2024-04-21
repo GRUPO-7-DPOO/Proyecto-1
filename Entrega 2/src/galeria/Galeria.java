@@ -237,7 +237,8 @@ public class Galeria {
 	}
 	
 	public void crearSubasta(Scanner sc, Date date) throws Exception{
-		
+		ArrayList<Pieza> listaPiezas = listaPiezas(sc);
+		String id = "s";
 	}
 	
 	private ArrayList<Pieza> listaPiezas(Scanner sc) throws Exception{
@@ -247,7 +248,7 @@ public class Galeria {
 		do {
 			pieza = sc.next();
 			if (!existePiezas(pieza)) {
-				throw new Exception("Esta pieza no existe");
+				throw new Exception("Esta pieza no existe.\nCerrando sesion...");
 			}
 			else {
 				piezas.add(this.Piezas.get(pieza));
