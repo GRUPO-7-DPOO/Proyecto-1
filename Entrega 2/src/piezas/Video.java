@@ -9,8 +9,8 @@ public class Video extends Pieza {
 	public String categoria;
 	
 
-	public Video(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, int duracion, String resolucion, float peso, String categoria) {
-		super(titulo, anio, lugarCreacion, autores, propietario);
+	public Video(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, String estadoC, boolean bodega, int valor, int duracion, String resolucion, float peso, String categoria) {
+		super(titulo, anio, lugarCreacion, autores, propietario, estadoC, bodega, valor);
 		this.duracion = duracion;
 		this.resolucion = resolucion;
 		this.peso = peso;

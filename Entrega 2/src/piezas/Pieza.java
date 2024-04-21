@@ -14,12 +14,14 @@ public abstract class Pieza {
 	protected int precioFijo; // En caso que no este disponible el valor sera 0000
 	public int id;
 	
-	public Pieza (String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario) {
+	public Pieza (String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, String estadoC, boolean bodega, int valor) {
 		this.titulo = titulo;
 		Anio = anio;
 		this.lugarCreacion = lugarCreacion;
 		Autores = autores;
 		this.propietario = propietario;
+		this.precioFijo = valor;
+		this.enBodega = bodega;
 	}
 	
 	public String getTitulo() {

@@ -54,12 +54,23 @@ public class Galeria {
 		return this.Usuarios.containsKey(login);
 	}
 	
-	public void registrarPieza(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, String tipoPieza, Scanner info) {
+	public void registrarPieza(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, String tipoPieza, Scanner info) throws Exception {
+		
 		String dimensiones;
 		ArrayList <String> materiales;
 		String resolucion;
 		float peso;
 		String categoria;
+		System.out.println("Escriba el estado de Compra (Disponible o no Disponible): ");
+		String estadoC = info.next();
+		if (estadoC.equalsIgnoreCase("Disponible")&& estadoC.equalsIgnoreCase("No Disponible")) {throw new Exception("Estado no disponible.\nCerrando sesion...");}
+		System.out.println("Escriba si estara en bodega o exhibida (Si escribe algo diferente a Bodega se considerara que no estara en esta.): ");
+		boolean bodega = true;
+		if (!info.next().equalsIgnoreCase("Bodega")){
+			bodega=false;
+		}
+		System.out.println("Escriba el valor de su pieza: ");
+		int valor = info.nextInt();
 		switch (tipoPieza) {
 		
 		case "Impresiones":
@@ -74,7 +85,7 @@ public class Galeria {
 			System.out.println("Diga el acabado de la impresion: ");
 			String acabado = info.next();
 			
-			Impresiones imp = new Impresiones(titulo, anio, lugarCreacion, autores, propietario, dimensiones, formatos, material, resolucion, acabado);
+			Impresiones imp = new Impresiones(titulo, anio, lugarCreacion, autores, propietario, estadoC, bodega, valor, dimensiones, formatos, material, resolucion, acabado);
 			Admin.registrarNuevaPieza(imp, this.Piezas);
 			break;
 			
@@ -90,7 +101,7 @@ public class Galeria {
 			float ppp = info.nextFloat();
 			System.out.println("Diga la categoria de la fotografia: ");
 			categoria = info.next();
-			Fotografia fto = new Fotografia(titulo, anio, lugarCreacion, autores, propietario, formato, resolucionFto, dimensiones,ppp, categoria);
+			Fotografia fto = new Fotografia(titulo, anio, lugarCreacion, autores, propietario, estadoC, bodega, valor, formato, resolucionFto, dimensiones,ppp, categoria);
 			Admin.registrarNuevaPieza(fto, this.Piezas);
 			break;
 			
@@ -101,11 +112,12 @@ public class Galeria {
 			materiales = listaMateriales(info);
 			System.out.println("Escriba el peso de la escultura: ");
 			peso = info.nextFloat();
-			System.out.println("Necesita electricidad?");
-			boolean necesitaElectricidad = info.hasNext("true");
+			System.out.println("Necesita electricidad? (Escriba si o no): ");
+			boolean necesitaElectricidad = true;
+			if (!info.next().equalsIgnoreCase("Si")) {necesitaElectricidad=false;}
 			System.out.println("Algun otro detalle de la instalacion?");
 			String detallesInstalacion = info.next();
-			Escultura esc = new Escultura(titulo, anio, lugarCreacion, autores, propietario, dimensiones, materiales, peso, necesitaElectricidad, detallesInstalacion);
+			Escultura esc = new Escultura(titulo, anio, lugarCreacion, autores, propietario, estadoC, bodega, valor, dimensiones, materiales, peso, necesitaElectricidad, detallesInstalacion);
 			Admin.registrarNuevaPieza(esc, this.Piezas);
 			break;
 			
@@ -118,7 +130,7 @@ public class Galeria {
 			String cuidados = info.next();
 			System.out.println("Escriba la tecnica de la pintura");
 			String tecnica = info.next();
-			Pintura pint = new Pintura(titulo, anio, lugarCreacion, autores, propietario, dimensiones, materiales, cuidados, tecnica);
+			Pintura pint = new Pintura(titulo, anio, lugarCreacion, autores, propietario, estadoC, bodega, valor, dimensiones, materiales, cuidados, tecnica);
 			Admin.registrarNuevaPieza(pint, this.Piezas);
 			break;
 			
@@ -131,7 +143,7 @@ public class Galeria {
 			peso = info.nextFloat();
 			System.out.println("Escriba la categoria del video: ");
 			categoria = info.next();
-			Video vid = new Video(titulo, anio, lugarCreacion, autores, propietario, duracion, resolucion, peso, categoria);
+			Video vid = new Video(titulo, anio, lugarCreacion, autores, propietario, estadoC, bodega, valor, duracion, resolucion, peso, categoria);
 			Admin.registrarNuevaPieza(vid, this.Piezas);
 			break;
 		}

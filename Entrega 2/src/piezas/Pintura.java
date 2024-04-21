@@ -9,8 +9,8 @@ public class Pintura extends Pieza{
 	private String cuidados;
 	private String tecnica;
 	
-	public Pintura(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, String dimensiones, ArrayList<String> materiales, String cuidados, String tecnica) {
-		super(titulo, anio, lugarCreacion, autores, propietario);
+	public Pintura(String titulo, int anio, String lugarCreacion, ArrayList<String> autores, String propietario, String estadoC, boolean bodega, int valor, String dimensiones, ArrayList<String> materiales, String cuidados, String tecnica) {
+		super(titulo, anio, lugarCreacion, autores, propietario, estadoC, bodega, valor);
 		this.dimensiones = dimensiones;
 		this.materiales = materiales;
 		this.cuidados = cuidados;

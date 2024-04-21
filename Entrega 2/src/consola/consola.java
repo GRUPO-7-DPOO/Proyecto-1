@@ -139,7 +139,7 @@ public class consola {
 		return galeria.iniciarSesion(login, clave);
 	}
 	
-	private void registrarPieza(Scanner sc) {
+	private void registrarPieza(Scanner sc) throws Exception {
 		System.out.println("Escriba el titulo de una pieza: ");
 		String titulo = sc.next();
 		System.out.println("Escriba el año de publicacion de esta: ");
