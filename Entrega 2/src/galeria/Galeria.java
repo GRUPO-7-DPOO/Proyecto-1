@@ -244,7 +244,7 @@ public class Galeria {
 		Admin.crearSubasta(id, listaPiezas, date, this.subastas);
 	}
 
-
+/*
 	public void crearCompra(String metodoPago, String id, String comprador, String piezaAComprar, int valor) {
 	    
 	    Compra nuevaCompra = new Compra(comprador, metodoPago, id, piezaAComprar,valor);
@@ -275,7 +275,7 @@ public class Galeria {
 			this.crearCompra(datos[0], datos[1],datos[2],datos[3],Integer.parseInt(datos[5]));
 		}
 	}
-	
+	*/
 	
 	private ArrayList<Pieza> listaPiezas(Scanner sc, String id) throws Exception{
 		System.out.println("Diga la lista de piezas que pasaran a la subasta (Escriba 1 para finalizar): ");
